@@ -52,6 +52,8 @@ public class Node<E> {
     public void setRight(Node<E> right) {
         this.right = right;
     }
-    
+    public boolean hasChilds(){
+        return this.getLeft()!=null || this.getRight()!=null;
+    }
     
 }
