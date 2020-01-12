@@ -1,3 +1,5 @@
+package proyecto_arbol;
+
 import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;

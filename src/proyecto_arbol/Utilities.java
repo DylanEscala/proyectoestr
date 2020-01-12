@@ -1,3 +1,5 @@
+package proyecto_arbol;
+
 
 import java.io.File;
 import javafx.scene.image.Image;
