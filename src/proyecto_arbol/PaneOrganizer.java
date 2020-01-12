@@ -19,19 +19,19 @@ public class PaneOrganizer {
     private final String nomBot = "Button";
     public Pane root(){
         VBox root=new VBox();
-        StackPane botonSi=Utilities.boton("nomBot");
-        StackPane botonNo=Utilities.boton("nomBot");
+        StackPane botonSi=Utilities.boton("Button");
+        StackPane botonNo=Utilities.boton("Button");
         
-        Label SiLabel = new Label("Registrar");
+        Label SiLabel = new Label("Si");
         SiLabel.setFont(CONSTANTES.MYFONT);
         SiLabel.setTextFill(Color.WHITE);
         botonSi.getChildren().add(SiLabel);
-        Label NoLabel = new Label("Registrar");
+        Label NoLabel = new Label("No");
         NoLabel.setFont(CONSTANTES.MYFONT);
         NoLabel.setTextFill(Color.WHITE);
         botonNo.getChildren().add(NoLabel);
         
-        
+        root.getChildren().addAll(botonSi,botonNo);
         
         
         

@@ -5,17 +5,28 @@
  */
 package proyecto_arbol;
 
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
+
 /**
  *
  * @author Familia
  */
-public class Proyecto_arbol {
+public class Proyecto_arbol extends Application {
 
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // TODO code application logic here
+        launch(args);
+    }
+
+    @Override
+    public void start(Stage primaryStage) throws Exception {
+        Scene scena=new Scene(new PaneOrganizer().root());
+        primaryStage.setScene(scena);
+        primaryStage.show();
     }
     
 }
