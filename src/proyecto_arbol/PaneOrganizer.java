@@ -1,6 +1,11 @@
 package proyecto_arbol;
 
+import javafx.geometry.Pos;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
@@ -17,11 +22,18 @@ import javafx.scene.paint.Color;
  */
 public class PaneOrganizer {
     private final String nomBot = "Button";
-    public Pane root(){
-        VBox root=new VBox();
-        StackPane botonSi=Utilities.boton("Button");
-        StackPane botonNo=Utilities.boton("Button");
-        
+    StackPane root;
+    public StackPane root(){
+        root=new StackPane();
+        ImageView fondo=new ImageView(new Image("recursos/imagenes/desierto.jpg"));
+        fondo.setFitHeight(900);
+        fondo.setFitWidth(900);
+        BorderPane root0=new BorderPane();
+        StackPane botonSi=Utilities.boton(nomBot);
+        StackPane botonNo=Utilities.boton(nomBot);
+//        Button botonSi=new Button("Si");
+//        Button botonNo=new Button("No");
+        VBox root01=new VBox();
         Label SiLabel = new Label("Si");
         SiLabel.setFont(CONSTANTES.MYFONT);
         SiLabel.setTextFill(Color.WHITE);
@@ -30,13 +42,14 @@ public class PaneOrganizer {
         NoLabel.setFont(CONSTANTES.MYFONT);
         NoLabel.setTextFill(Color.WHITE);
         botonNo.getChildren().add(NoLabel);
+        HBox center=new HBox();
+        center.getChildren().addAll(botonSi,botonNo);
+        center.setSpacing(30);
+        center.setAlignment(Pos.TOP_CENTER);
+        root0.setBottom(center);
         
+        root.getChildren().addAll(fondo,root0);
         root.getChildren().addAll(botonSi,botonNo);
-        
-        
-        
-        
         return root;
     }
-    
 }

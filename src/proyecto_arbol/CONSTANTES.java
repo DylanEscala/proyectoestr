@@ -19,6 +19,6 @@ public final class CONSTANTES {
     public static final double WIDTH =450;
     public static final double HEIGHT =600;
     public static final String RUTA_IMGS="/recursos/imagenes/";
-    public static final String RUTA_TEXT="src/recursos/texto/";
+    public static final String RUTA_TEXT="/recursos/texto/";
     public static final Font MYFONT = Font.font("Arial", FontWeight.NORMAL, FontPosture.REGULAR, 25);
 }
