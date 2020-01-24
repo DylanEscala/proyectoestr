@@ -1,10 +1,17 @@
+package proyecto_arbol;
 
+
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.FileWriter;
+import java.io.IOException;
 import java.io.PrintWriter;
-import java.net.URI;
-import java.util.Scanner;
 import java.util.Stack;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -15,10 +22,10 @@ import java.util.Stack;
  *
  * @author dylan
  */
-public class GMind<String> {
+public class GMind {
 
     Node<String> root;
-    java.lang.String fileS = "datos-1.txt";
+    String fileS = "datos-1.txt";
     Node<String> current;
 
     public GMind() {
@@ -26,34 +33,41 @@ public class GMind<String> {
         current = root;
     }
 
-    public void cargarArbol(java.lang.String file) {
+    public void cargarArbol(String file) {
+        FileReader fr = null;
         Stack pila = new Stack();
         try {
-            Scanner input = new Scanner(new File(file));
-            while (input.hasNextLine()) {
-                java.lang.String line = (java.lang.String) input.nextLine();
+            File fil=new File("datos-1.txt");
+            fr = new FileReader(fil);
+            BufferedReader bf=new BufferedReader(fr);
+            String line=bf.readLine();
+            while (line!=null){
+                System.out.println(line);
                 char l = line.charAt(1);
                 if (l == 'R') {
                     Node<String> node = new Node(line.substring(3) + "!");
                     pila.push(node);
                 } else {
-
                     Node<String> node = new Node(line.substring(3) + "?");
-                    Node<String> noder = (Node<String>) pila.peek();
-                    noder.setFather(node);
-                    node.setRight(noder);
-                    if (!(pila.isEmpty())) {
-                        Node<String> nodel = (Node<String>) pila.peek();
-                        node.setLeft(nodel);
-                        nodel.setFather(node);
-                    }
+                    root=node;
+                    node.setRight((Node<String>)pila.pop());
+                    node.setLeft((Node<String>)pila.pop());
                     pila.push(node);
                 }
+                 line = bf. readLine();
             }
-            input.close();
-        } catch (Exception e) {
+            bf.close();
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(GMind.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(GMind.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            try {
+                fr.close();
+            } catch (IOException ex) {
+                Logger.getLogger(GMind.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
-        root = (Node<String>) pila.peek();
     }
 
     public void preguntar(String str) {
@@ -78,29 +92,47 @@ public class GMind<String> {
     }
 
     public void guardarArbolito() {
-        guardarArbolito(root);
+        BufferedWriter bw=null;
+        try {
+            File f=new File(fileS);
+            bw = new BufferedWriter(new FileWriter(f));
+            bw.write("");
+            bw.close();
+            guardarArbolito(root);
+        } catch (IOException ex) {
+            Logger.getLogger(GMind.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            try {
+                bw.close();
+            } catch (IOException ex) {
+                Logger.getLogger(GMind.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
     }
 
     private void guardarArbolito(Node<String> node) {
         try {
             if (node.hasChilds()) {
-                guardarArbolito(node.getRight());
                 guardarArbolito(node.getLeft());
-                FileWriter fichero = null;
+                guardarArbolito(node.getRight());
+                FileWriter fichero=null;
                 PrintWriter pw = null;
                 fichero = new FileWriter(fileS);
-                pw = new PrintWriter(fichero);
+                pw = new PrintWriter(fichero,true);
                 pw.println("#P"+node.getData());
                 fichero.close();
             }else{
                 FileWriter fichero = null;
                 PrintWriter pw = null;
-                fichero = new FileWriter(fileS);
+                fichero = new FileWriter(fileS,true);
                 pw = new PrintWriter(fichero);
                 pw.println("#R"+node.getData());
                 fichero.close();
             }
         } catch (Exception e) {
         }
+    }
+    public String getCurrent(){
+        return current.getData();
     }
 }

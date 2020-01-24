@@ -12,8 +12,7 @@ import javafx.stage.Stage;
 /**
  *
  * @author Familia
- */
-public class Proyecto_arbol extends Application {
+ */public class Proyecto_arbol extends Application {
 
     /**
      * @param args the command line arguments
@@ -24,7 +23,7 @@ public class Proyecto_arbol extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        Scene scena=new Scene(new PaneOrganizer().root());
+        Scene scena=new Scene(new PaneOrganizer().root(),800,500);
         primaryStage.setScene(scena);
         primaryStage.show();
     }

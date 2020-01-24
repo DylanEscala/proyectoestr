@@ -28,7 +28,8 @@ public final class Utilities {
         ImageView imgVButton = new ImageView(imgButton);
         pBoton.setOnMousePressed(e->{
             imgVButton.setImage(imgButtonPressed);
-            Media musicFile = new Media(new File("src/recursos/chestClick.mp3").toURI().toString());
+            Media musicFile = new Media(new File("src/"
+                    + "recursos/chestClick.mp3").toURI().toString());
             MediaPlayer mp = new MediaPlayer(musicFile);
             mp.play();
             
