@@ -23,7 +23,9 @@ import javafx.stage.Stage;
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        Scene scena=new Scene(new PaneOrganizer().root(),800,500);
+        PaneOrganizer pn=new PaneOrganizer();
+        pn.menu();
+        Scene scena=new Scene(pn.getroot(),800,500);
         primaryStage.setScene(scena);
         primaryStage.show();
     }

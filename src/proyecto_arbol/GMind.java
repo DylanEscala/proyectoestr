@@ -50,8 +50,12 @@ public class GMind {
                 } else {
                     Node<String> node = new Node(line.substring(3) + "?");
                     root=node;
-                    node.setRight((Node<String>)pila.pop());
-                    node.setLeft((Node<String>)pila.pop());
+                    Node<String> noder=((Node<String>)pila.pop());
+                    noder.setFather(node);
+                    Node<String> nodel=((Node<String>)pila.pop());
+                    nodel.setFather(node);
+                    node.setRight(noder);
+                    node.setLeft(nodel);
                     pila.push(node);
                 }
                  line = bf. readLine();
@@ -134,5 +138,18 @@ public class GMind {
     }
     public String getCurrent(){
         return current.getData();
+    }
+    public void anadir(String preg,String res){
+        Node<String> nuevop=new Node(preg);
+        nuevop.setFather(current.getFather());
+        Node<String> nuevor=new Node(res);
+        current.setFather(nuevop);
+        nuevor.setFather(nuevop);
+        Node<String> curr=current;
+        current=nuevop;
+        current.setLeft(nuevor);
+        current.setRight(curr);
+    }public void restart(){
+        current=root;
     }
 }
