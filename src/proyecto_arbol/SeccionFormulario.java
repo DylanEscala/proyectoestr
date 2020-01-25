@@ -13,7 +13,7 @@ import javafx.scene.paint.Color;
 
 /**
  *
- * @author David Santistevan
+ * @author Dylan
  */
 public class SeccionFormulario {
 

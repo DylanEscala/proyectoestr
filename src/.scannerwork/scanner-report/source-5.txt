@@ -136,7 +136,6 @@ public class PaneOrganizer {
                             arbol.anadir(preg.getCampo().getText(), resp.getCampo().getText());
                             arbol.restart();
                             Thread n = new Thread(new Runnable() {
-                              
                                 @Override
                                 public void run() {
                                     Platform.runLater(new Runnable() {

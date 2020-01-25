@@ -1,6 +1,12 @@
+#R Gato
 #R un perro
+#P Tiene bigotes?
+#R Cerdo
 #R una oveja
+#P es omnívoro?
+#R Tigre
 #R un elefante
+#P Come carne?
 #P es un animal de granja?
 #P es un animal domestico?
 #R un pinguino

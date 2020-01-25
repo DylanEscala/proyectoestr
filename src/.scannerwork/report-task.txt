@@ -1,0 +1,6 @@
+projectKey=mmacia2019:proyecto_arbol
+serverUrl=http://200.9.176.59:9000
+serverVersion=7.7.0.23042
+dashboardUrl=http://200.9.176.59:9000/dashboard?id=mmacia2019%3Aproyecto_arbol
+ceTaskId=AW_eDz8rvXyWqgoFqhE6
+ceTaskUrl=http://200.9.176.59:9000/api/ce/task?id=AW_eDz8rvXyWqgoFqhE6
