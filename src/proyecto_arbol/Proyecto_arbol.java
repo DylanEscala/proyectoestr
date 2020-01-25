@@ -7,6 +7,8 @@ package proyecto_arbol;
 
 import javafx.application.Application;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 
 /**
@@ -26,6 +28,9 @@ import javafx.stage.Stage;
         PaneOrganizer pn=new PaneOrganizer();
         pn.menu();
         Scene scena=new Scene(pn.getroot(),800,500);
+        
+        Image icono = new Image("recursos/imagenes/icono.png");
+        primaryStage.getIcons().add(icono);
         primaryStage.setTitle("Genio Politecnico");
         primaryStage.setScene(scena);
         primaryStage.show();
