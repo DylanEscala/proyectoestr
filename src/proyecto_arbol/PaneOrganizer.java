@@ -169,7 +169,9 @@ public class PaneOrganizer {
         guardar.setFont(CONSTANTES.MYFONT);
         guardar.setTextFill(Color.WHITE);
         root0.setCenter(botong);
-        img.setImage(new Image("recursos/imagenes/akinatori.png"));
+        img.setImage(new Image("recursos/imagenes/icono.png"));
+        img.setFitHeight(400);
+        img.setFitWidth(400);
         root0.setRight(img);
         botong.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
