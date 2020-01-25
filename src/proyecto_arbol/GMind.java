@@ -45,10 +45,10 @@ public class GMind {
             while (line!=null){
                 char l = line.charAt(1);
                 if (l == 'R') {
-                    Node<String> node = new Node(line.substring(3) + "!");
+                    Node<String> node = new Node(line.substring(3));
                     pila.push(node);
                 } else {
-                    Node<String> node = new Node(line.substring(3) + "?");
+                    Node<String> node = new Node(line.substring(3));
                     root=node;
                     Node<String> noder=((Node<String>)pila.pop());
                     noder.setFather(node);
@@ -101,8 +101,8 @@ public class GMind {
             File f=new File(fileS);
             bw = new BufferedWriter(new FileWriter(f));
             bw.write("");
+            guardarArbolito(root,bw);
             bw.close();
-//            guardarArbolito(root);
         } catch (IOException ex) {
             Logger.getLogger(GMind.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
@@ -114,26 +114,14 @@ public class GMind {
         }
     }
 
-    private void guardarArbolito(Node<String> node) {
+    private void guardarArbolito(Node<String> node,BufferedWriter bw) {
         try {
             if (node.hasChilds()) {
-                guardarArbolito(node.getLeft());
-                guardarArbolito(node.getRight());
-                FileWriter fichero=null;
-                BufferedWriter pw = null;
-                fichero = new FileWriter((new File(fileS)).getAbsoluteFile(),true);
-                pw = new BufferedWriter(fichero);
-                pw.write("#P "+node.getData());
-                pw.close();
-                fichero.close();
+                guardarArbolito(node.getLeft(),bw);
+                guardarArbolito(node.getRight(),bw);
+                bw.write("#P "+node.getData()+"\n");
             }else{
-                FileWriter fichero = null;
-                PrintWriter pw = null;
-                fichero = new FileWriter(fileS);
-                pw = new PrintWriter(fichero);
-                pw.println("#R "+node.getData());
-                pw.close();
-                fichero.close();
+                bw.write("#R "+node.getData()+"\n");
             }
         } catch (Exception e) {
             System.out.println("error");

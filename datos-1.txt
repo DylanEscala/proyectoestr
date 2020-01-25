@@ -1,0 +1,15 @@
+#R un perro
+#R una oveja
+#R un elefante
+#P es un animal de granja?
+#P es un animal domestico?
+#R un pinguino
+#R un calamar
+#R es una oruga
+#R es una marmota
+#R una ara�a
+#P es grande?
+#P es largo?
+#P vive en el oceano?
+#P es un ave?
+#P es un mamifero?
