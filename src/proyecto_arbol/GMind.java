@@ -29,6 +29,7 @@ public class GMind {
     Node<String> current;
 
     public GMind() {
+        if (root==null)
         cargarArbol(fileS);
         current = root;
     }
@@ -42,7 +43,6 @@ public class GMind {
             BufferedReader bf=new BufferedReader(fr);
             String line=bf.readLine();
             while (line!=null){
-                System.out.println(line);
                 char l = line.charAt(1);
                 if (l == 'R') {
                     Node<String> node = new Node(line.substring(3) + "!");
@@ -102,7 +102,7 @@ public class GMind {
             bw = new BufferedWriter(new FileWriter(f));
             bw.write("");
             bw.close();
-            guardarArbolito(root);
+//            guardarArbolito(root);
         } catch (IOException ex) {
             Logger.getLogger(GMind.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
@@ -120,20 +120,23 @@ public class GMind {
                 guardarArbolito(node.getLeft());
                 guardarArbolito(node.getRight());
                 FileWriter fichero=null;
-                PrintWriter pw = null;
-                fichero = new FileWriter(fileS);
-                pw = new PrintWriter(fichero,true);
-                pw.println("#P"+node.getData());
+                BufferedWriter pw = null;
+                fichero = new FileWriter((new File(fileS)).getAbsoluteFile(),true);
+                pw = new BufferedWriter(fichero);
+                pw.write("#P "+node.getData());
+                pw.close();
                 fichero.close();
             }else{
                 FileWriter fichero = null;
                 PrintWriter pw = null;
-                fichero = new FileWriter(fileS,true);
+                fichero = new FileWriter(fileS);
                 pw = new PrintWriter(fichero);
-                pw.println("#R"+node.getData());
+                pw.println("#R "+node.getData());
+                pw.close();
                 fichero.close();
             }
         } catch (Exception e) {
+            System.out.println("error");
         }
     }
     public String getCurrent(){
@@ -143,6 +146,11 @@ public class GMind {
         Node<String> nuevop=new Node(preg);
         nuevop.setFather(current.getFather());
         Node<String> nuevor=new Node(res);
+        if(current.getFather().getLeft()==current){
+            current.getFather().setLeft(nuevop);
+        }else{
+            current.getFather().setRight(nuevop);
+        }
         current.setFather(nuevop);
         nuevor.setFather(nuevop);
         Node<String> curr=current;

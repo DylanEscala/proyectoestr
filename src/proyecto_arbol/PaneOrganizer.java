@@ -31,18 +31,22 @@ public class PaneOrganizer {
     GMind arbol;
     BorderPane root0;
     ImageView img;
-    public PaneOrganizer(){
+
+    public PaneOrganizer() {
+        arbol = new GMind();
+        img = new ImageView();
         root0 = new BorderPane();
         root = new StackPane();
-        ImageView fondo = new ImageView(new Image("recursos/imagenes/desierto.jpg"));fondo.setFitHeight(900);
+        ImageView fondo = new ImageView(new Image("recursos/imagenes/desierto.jpg"));
+        fondo.setFitHeight(900);
         fondo.setFitWidth(900);
         root.getChildren().addAll(fondo, root0);
     }
+
     public void root() {
-        arbol = new GMind();
-        
+
         ImageView dialog = new ImageView(new Image("recursos/imagenes/dialogo.png"));
-        img = new ImageView(new Image("recursos/imagenes/akinatorp.png"));
+        img.setImage(new Image("recursos/imagenes/akinatorp.png"));
 //        img.setLayoutX(0);
 //        img.setLayoutY(0);
         dialog.setFitHeight(100);
@@ -72,7 +76,6 @@ public class PaneOrganizer {
         center.setAlignment(Pos.TOP_CENTER);
         root0.setBottom(center);
         root0.setCenter(sp1);
-        root0.setRight(img);
 
         botonSi.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
@@ -80,7 +83,31 @@ public class PaneOrganizer {
                 if (!arbol.hasnext()) {
                     img.setImage(new Image("recursos/imagenes/akinatorf.png"));
                     lab.setText("El genio lo ha hecho de nuevo.");
+                    StackPane spn = Utilities.boton(nomBot);
+                    Label menu = new Label("Menu");
+                    menu.setFont(CONSTANTES.MYFONT);
+                    menu.setTextFill(Color.WHITE);
+                    spn.getChildren().add(menu);
+                    spn.setOnMouseClicked(new EventHandler<MouseEvent>() {
+                        @Override
+                        public void handle(MouseEvent arg0) {
+                            Thread n = new Thread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    Platform.runLater(new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            menu();
+                                        }
+                                    });
+                                }
+                            });
+                            n.start();
+                        }
+                    });
+
                     root0.setBottom(null);
+                    root0.setBottom(spn);
                     arbol.restart();
                 } else {
                     arbol.preguntar("Si");
@@ -105,28 +132,28 @@ public class PaneOrganizer {
                     vb.setAlignment(Pos.CENTER);
                     root0.setCenter(vb);
                     root0.setBottom(botong);
-                    botong.setOnMouseClicked((e)-> {
-                        if(preg.getCampo().equals("")||resp.getCampo().equals("")){
+                    botong.setOnMouseClicked((e) -> {
+                        if (preg.getCampo().getText().equals("") || resp.getCampo().getText().equals("")) {
                             preg.activarError("Llenar los campos");
                             resp.activarError("Llenar los campos");
-                        }
-                        else{
+                        } else {
                             arbol.anadir(preg.getCampo().getText(), resp.getCampo().getText());
-                            Thread n=new Thread(new Runnable() {
-                    @Override
-                    public void run() {
-                        Platform.runLater(new Runnable() {
-                            @Override
-                            public void run() {
-                               menu();
-                            }
-                        });
+                            arbol.restart();
+                            Thread n = new Thread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    Platform.runLater(new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            menu();
+                                        }
+                                    });
+                                }
+                            });
+                            n.start();
+                            arbol.guardarArbolito();
+                        }
                     }
-                });
-                n.start();
-                arbol.guardarArbolito();
-                        }
-                        }
                     );
 
                 } else {
@@ -138,23 +165,25 @@ public class PaneOrganizer {
     }
 
     public void menu() {
-        
+
         StackPane botong = Utilities.boton(nomBot);
         Label guardar = new Label("Comenzar");
         botong.getChildren().add(guardar);
         guardar.setFont(CONSTANTES.MYFONT);
         guardar.setTextFill(Color.WHITE);
         root0.setCenter(botong);
+        img.setImage(new Image("recursos/imagenes/akinatori.png"));
+        root0.setRight(img);
         botong.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent arg0) {
-                Thread n=new Thread(new Runnable() {
+                Thread n = new Thread(new Runnable() {
                     @Override
                     public void run() {
                         Platform.runLater(new Runnable() {
                             @Override
                             public void run() {
-                               root();
+                                root();
                             }
                         });
                     }
@@ -162,9 +191,11 @@ public class PaneOrganizer {
                 n.start();
             }
         });
-                
+        root0.setBottom(null);
+
     }
-    public StackPane getroot(){
+
+    public StackPane getroot() {
         return root;
     }
 }
